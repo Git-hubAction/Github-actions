@@ -1,0 +1,6 @@
+name: forking a repository
+on: push
+jobs:
+  testing:
+    - name: just an echo
+      run: echo "hi i am going great"
