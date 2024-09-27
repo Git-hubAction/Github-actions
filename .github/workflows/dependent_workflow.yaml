@@ -1,0 +1,10 @@
+name: workflow run
+on:
+  workflow_run:
+    workflows: [checkout files and folders]
+    types: [in_progress]
+jobs:
+  echo-string:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "I was triggered because 'Repository Events' was completed"
