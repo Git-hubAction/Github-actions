@@ -8,6 +8,9 @@ jobs:
         run: ls -a
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
       - name: list files after
         uses: ls -a
   checkout-actions-manually:
