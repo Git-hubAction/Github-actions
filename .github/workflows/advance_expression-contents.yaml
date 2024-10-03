@@ -10,7 +10,7 @@ jobs:
               if: contains(github.event.issue.labels.*.name , 'bug')
               run: echo ${{ join(github.event.issue.labels.*.name, ', ') }}
     using-expression-contents:
-        runs-on: ubunutu-latest
+        runs-on: ubuntu-latest
         if: github.event_name == 'push'
         steps:
         - name: expression representation
