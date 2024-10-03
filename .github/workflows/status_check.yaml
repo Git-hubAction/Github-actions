@@ -1,0 +1,28 @@
+name: status-check-job
+on: push
+jobs:
+    status-check-of-jobs:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Sleep job
+              run: sleep 20
+            - name: job fails
+              id: step2
+              run: exit 1
+            - name: execute on failure
+              if: failure() && steps.step2.conclusion=='failure'
+              run: echo "step2 job is failed"
+            - name: always execute
+              if: always()
+              run: echo "this job always execute"
+            - name: Runs wehn cancelled
+              if : cancelled()
+              run: echo "executes when job cancelled"
+    job2:
+        runs-on: ubuntu-latest
+        needs: status-check-of-jobs
+        if: failure()
+        steps:
+            - name: job failed
+              run: echo "earlier job is failed"
+
