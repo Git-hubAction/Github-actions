@@ -7,4 +7,4 @@ jobs:
     - name: just an echo
       run: echo "hi i am going great"
     - name: printing actions
-      run: ${{ GITHUB.events }}
+      run: ${{ GITHUB.EVENTS }}
