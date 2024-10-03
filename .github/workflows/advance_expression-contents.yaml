@@ -1,0 +1,32 @@
+name : expression and contents
+on: [push,pull_request,issues]
+run-name: expression and contents are executed by @${{github.actor}}
+jobs:
+    runs-on-issues-and-prs:
+        runs-on: ubuntu-latest
+        if: contains(fromJson('["issues","pull_request"]'),github.event_name)
+        steps:
+            - name: runs only if it has bug
+              if: contains(github.event.issue.labels.*.name , 'bug')
+              run: echo ${{ join(github.event.issue.labels.*.name, ', ') }}
+    using-expression-contents:
+        runs-on: ubunutu-latest
+        if: github.event_name == 'push'
+        steps:
+        - name: expression representation
+          run: |
+            echo ${{1}}
+            echo ${{'this is string'}}
+            echo ${{ 1 > 2 }}
+            echo ${{ 'string' == 'STRING'}}
+            echo ${{ true && false}}
+        - name: context information
+          run: |
+            echo " ${{toJson(github)}}"
+            echo "${{toJson(secrets)}}"
+            echo "${{toJson(job)}}"
+            echo "${{toJson(steps)}}"
+            echo "${{toJson(runner)}}"
+
+
+
