@@ -3,14 +3,22 @@ on: push
 run-name: Expression and contexts are created by @${{GITHUB.actor}}
 jobs:
     Expressions:
-    runs-on: ubuntu-latest
-    steps:
-    - name: expression representation
-      run: |
-        echo ${{1}}
-        echo ${{'this is string'}}
-        echo ${{ 1 > 2 }}
-        echo ${{ 'string' == 'STRING'}}
-        echo ${{ true && false}}
+        runs-on: ubuntu-latest
+        steps:
+        - name: expression representation
+          run: |
+            echo ${{1}}
+            echo ${{'this is string'}}
+            echo ${{ 1 > 2 }}
+            echo ${{ 'string' == 'STRING'}}
+            echo ${{ true && false}}
+        - name: context information
+          run: |
+            echo " ${{toJson(github)}}"
+            echo "${{toJson(secrets)}}"
+            echo "${{toJson(job)}}"
+            echo "${{toJson(steps)}}"
+            echo "${{toJson(runner)}}"
+
 
     
