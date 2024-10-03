@@ -14,7 +14,7 @@ jobs:
               run: echo "step2 job is failed"
             - name: always execute
               if: always()
-              run: echo "this job always execute"
+              run: echo "this job alwaysexecute"
             - name: Runs wehn cancelled
               if : cancelled()
               run: echo "executes when job cancelled"
