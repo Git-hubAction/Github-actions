@@ -7,10 +7,10 @@ jobs:
     steps:
     - name: expression representation
       run: |
-      echo ${{1}}
-      echo ${{'this is string'}}
-      echo ${{ 1 > 2 }}
-      echo ${{ 'string' == 'STRING'}}
-      echo ${{ true && false}}
+        echo ${{1}}
+        echo ${{'this is string'}}
+        echo ${{ 1 > 2 }}
+        echo ${{ 'string' == 'STRING'}}
+        echo ${{ true && false}}
 
     
