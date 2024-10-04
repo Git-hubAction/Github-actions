@@ -10,12 +10,12 @@ jobs:
                 include:
                     - os: ubuntu-latest
                       is-ubuntu: true
-                    - os: mac-os
+                    - os: mac-os-latest
                       node: 16
                     - expiremental: false
                     - os: ubuntu-latest
                       node: 18
-                      experimental: true
+                      expiremental: true
                     - os: ubuntu-latest
                       node: 17
             fail-fast: true
