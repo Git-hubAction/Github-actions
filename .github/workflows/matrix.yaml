@@ -1,0 +1,29 @@
+name: matrix-expression
+on: [push]
+jobs:
+    matrix-expression:
+        continue-on-error: ${{ matrix.expiremental== true }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest,windows-latest]
+                node: [16,17,18]
+                include:
+                    - os: ubuntu-latest
+                      is-ubuntu: true
+                    - os: mac-os
+                      node: 16
+                    - expiremental: false
+                    - os: ubuntu-latest
+                      node: 18
+                      experimental: true
+                    - os: ubuntu-latest
+                      node: 17
+            fail-fast: true
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: display values
+              run: echo '${{ toJson(matrix) }}'
+            - name: if experimental fails
+              if: ${{ matrix.expiremental== true }}
+              run: exit 1
+            - run: node -v
