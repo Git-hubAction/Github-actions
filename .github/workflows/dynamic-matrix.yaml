@@ -1,0 +1,23 @@
+name: dynamic-matrix
+on:
+    workflow_dispatch:
+        inputs:
+            os:
+                description: opertaing system
+                default: "ubuntu-latest,windows-latest"
+                type: string
+            node-version:
+                description: node versions
+                default: "16,17,18"
+                type: string
+jobs:
+    prepare-matrix:
+        runs-on: ubuntu-latest
+        steps:
+            - name: split os and node version
+              uses: actions/github-script@v6
+              id: split
+              with:
+               script: "return {os: context.payload.inputs.['os'].split(,),'node-version': context.payload.inputs.['node-version'].split(,)}"
+               result-encoding: json
+            - run: echo "${{steps.split.outputs.result}}"
