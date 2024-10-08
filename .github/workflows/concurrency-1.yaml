@@ -9,7 +9,7 @@ on:
                 type: environment
 concurrency:
     group: ${{github.event.inputs.environment}}
-    cancel-in-progess: true
+  #  cancel-in-progess: true
 jobs:
     concurrency-1:
         runs-on: ubuntu-latest
