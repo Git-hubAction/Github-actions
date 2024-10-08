@@ -25,6 +25,6 @@ jobs:
             - run: echo "${{steps.split.outputs.result}}"
     another-matrix:
         needs: prepare-matrix
-        runs-on: ${{needs.prepare-matrix.outputs.matrix_array.os}}
+        runs-on: ${{fromJson(needs.prepare-matrix.outputs.matrix_array).os}}
         steps:
-        - run: ${{needs.prepare-matrix.outputs.matrix_array.node-version}}
+        - run: ${{fromJson(needs.prepare-matrix.outputs.matrix_array).node-version}}
