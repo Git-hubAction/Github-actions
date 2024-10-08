@@ -1,0 +1,18 @@
+name: concurrency01
+run-name: concurrency-1
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: the environment in which this job runs
+                required: true
+                type: environment
+concurrency:
+    group: ${{github.event.inputs.environment}}
+    cancel-in-progess: true
+jobs:
+    concurrency-1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: concurrency-1
+              run: sleep 20
