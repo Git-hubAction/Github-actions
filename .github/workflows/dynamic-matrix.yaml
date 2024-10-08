@@ -25,6 +25,14 @@ jobs:
             - run: echo "${{steps.split.outputs.result}}"
     another-matrix:
         needs: prepare-matrix
-        runs-on: ${{fromJson(needs.prepare-matrix.outputs.matrix_array).os}}
+        strategy:
+            matrix:
+                os: ${{ fromJson(needs.prepare-matrix.outputs.matrix-arrays).os }}
+                node-version: ${{ fromJson(needs.prepare-matrix.outputs.matrix-arrays).node-version }}
+        runs-on: ${{ matrix.os }}
         steps:
-        - run: ${{fromJson(needs.prepare-matrix.outputs.matrix_array).node-version}}
+            - run: node -v
+            - uses: actions/setup-node@v3
+            with:
+            node-version: ${{ matrix.node-version }}
+            - run: node -v
