@@ -13,6 +13,8 @@ on:
 jobs:
     prepare-matrix:
         runs-on: ubuntu-latest
+        outputs: 
+            matrix_array: ${{steps.split.outputs.result}}
         steps:
             - name: split os and node version
               uses: actions/github-script@v6
@@ -21,3 +23,8 @@ jobs:
                script: "return {os: context.payload.inputs['os'].split(','),'node-version': context.payload.inputs['node-version'].split(',')}"
                result-encoding: json
             - run: echo "${{steps.split.outputs.result}}"
+    another-matrix:
+        needs: prepare-matrix
+        runs-on: ${{needs.prepare-matrix.outputs.matrix_array.os}}
+        steps:
+        - run: ${{needs.prepare-matrix.outputs.matrix_array.node-version}}
